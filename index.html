@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .positive {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .negative {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Review Sentiment Analysis</h1>
+    <form action="{{ url_for('predict') }}" method="post">
+        <textarea name="review" rows="10" cols="50" placeholder="Enter your movie review here...">{{ review }}</textarea><br><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+    <div class="result {{ 'positive' if prediction == 'positive' else 'negative' }}">
+        <h2>Prediction: {{ prediction }}</h2>
+    </div>
+    {% endif %}
+</body>
+</html>
